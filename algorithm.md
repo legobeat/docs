@@ -8,13 +8,13 @@ The name Eigen Trust originates from the original paper: [https://nlp.stanford.e
 \
 It relates to the way the reputation score is calculated, which is done the following way:\
 \
-Suppose we have a vector \`s\` that contains the initial scores for 5 peers:
+Suppose we have a vector `s` that contains the initial scores for 5 peers:
 
 ```
 s = [1000, 2000, 500, 300, 200]
 ```
 
-We will refer to peers by their index in this set. e.g. Peer 0 is a peer on index 0 (which has reputation of `1000`)
+We will refer to peers by their index in this set. e.g. Peer 0 is a peer on index `0` (which has reputation of `1000`)
 
 Now let's suppose we have an opinion matrix:
 
@@ -113,4 +113,4 @@ The logs:
 We can see that only after a few iterations, the scores will converge, depending on how much accuracy you need.
 
 Now, let's go back to explaining why is it called Eigen Trust:\
-I don't know why it's called Eigen Trust -- it has something to do with the principal eigenvector of the matrix `op`  or something :tada:
+We don't know why it's called Eigen Trust -- it has something to do with the principal eigenvector of the matrix `op`  or something :tada:

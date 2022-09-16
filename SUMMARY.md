@@ -14,5 +14,5 @@
 
 ## ZK Circuits
 
-* [Iteration validity proofs](zk-circuits/iteration-validity-proofs.md)
-* [Convergence validity proofs](zk-circuits/convergence-validity-proofs.md)
+* [Iteration validity proofs (IVPs)](zk-circuits/iteration-validity-proofs-ivps.md)
+* [Convergence validity proofs (CVPs)](zk-circuits/convergence-validity-proofs-cvps.md)
