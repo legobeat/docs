@@ -6,3 +6,6 @@ description: >-
 
 # Domains
 
+* Why domains exist - what kind of domains exist
+* Domain aggregation
+* Special domain for managers and root domain
