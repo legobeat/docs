@@ -12,7 +12,7 @@ There are two types of intervals in Eigen Trust:
 
 They are ticking every \~10s and in each tick one iteration of Eigen Trust algorithm is calculated. The number of tick is fixed (depending on how many iterations we need for convergence).
 
-At every iteration nodes will send requests to each other for Iteration Validity Proofs (IVPs). Since every peer will have `n` managers, the requests will be sent to all `n`, assuming that at least one of them will provide correct proof, and be on time.
+At every iteration nodes will send requests to each other for Iteration Validity Proofs (IVPs). Since every peer will have `n` managers, the requests will be sent to all `n`, assuming that at least one of them will provide correct proof, and be on time. All nodes that did not reply on time or provided invalid proof, will have their score slashed by the requesting peer (broadcast a `0` score into DHT network).
 
 <figure><img src="../.gitbook/assets/Iterations-image.jpeg" alt=""><figcaption><p>Illustration of iteration intervals.</p></figcaption></figure>
 
@@ -65,6 +65,4 @@ If the manager does reply with correct proof, we will give him an `x` amount of 
 The process of choosing to which manager we will send requests should be calculated based on their reputation in previous Epoch, in a following way:\
 \- First we find all the managers for peer N.\
 \- We query their reputation, and normalise it.\
-\- We pick a random manager based on this normalised scores.
-
-TBD
+\- We pick a random manager based on this normalised distribution.
