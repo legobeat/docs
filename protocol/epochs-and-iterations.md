@@ -47,7 +47,7 @@ let mut interval = time::interval_at(start, interval.as_secs());
 Visual illustration:
 
 ```rust
-0    10s   1          2          3          4          5          6          7
+0   3600s  1          2          3          4          5          6          7
 |----------|----------|----------|----------|----------|----------|----------|
                                     now^    ^start of the interval
 ```

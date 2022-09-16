@@ -14,5 +14,4 @@
 ## ZK Circuits
 
 * [Iteration validity proofs (IVPs)](zk-circuits/iteration-validity-proofs-ivps.md)
-* [Reputation decay](zk-circuits/reputation-decay.md)
 * [Convergence validity proofs (CVPs)](zk-circuits/convergence-validity-proofs-cvps.md)

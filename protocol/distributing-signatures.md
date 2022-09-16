@@ -6,10 +6,6 @@ description: >-
 
 # Distributing Signatures
 
-* Where do we store signatures - explain DHT network
-* Requirements for insertion
-* Signature layout
-
 ### Where do we store signatures?
 
 * Our assumption is that, in a DHT network, when you insert a key, the protocol will find the `n` closest peers to that key, and make them providers for that key. In our case the keys will be the public keys of everyone in the network, and the values will be latest signatures from the peers we are managing.
