@@ -27,13 +27,12 @@ When values are to about to be added into the bucket:
 
 We are using Eddsa as out signature scheme. The reason for this choice is simply the SNARK-friendliness of this scheme.
 
-For keys we are using BabyJubJub EC point, so that would be 68 bytes without compression:
+For keys we are using BabyJubJub EC point, so that would be 64 bytes without compression:
 
 ```rust
 struct Key {
     x: [u8; 32],
     y: [u8; 32],
-    domain: u32,
 }
 ```
 
@@ -46,6 +45,7 @@ struct Value {
     sig_s: [u8; 32],
     neighbours: [[u8; 32]; 256],
     scores: [u8; 256],
+    epoch: u64,
 }
 ```
 
@@ -54,10 +54,10 @@ To calculate the message hash, we do the following (pseudo Rust code):
 ```rust
 // First, we want to construct pairs from neighbours and scores
 let pairs = [(neighbours[0], scores[0]) ... (neighbours[n], scores[n])];
-// Then we construct a hight-8 merkle root from these pairs
+// Then we construct a hight-9 merkle root from these pairs
 let merkle_tree_root = merkle_tree_from(pairs);
 // Then we hash the root and the domain and get the message hash
 let message_hash = poseidon(merkle_tree_root, domain);
 ```
 
-Number of bytes would be: 32 + 32 + 32 + (32 \* 256) + 256 = 8544, which is more than 8 MB. We should try different compression techniques to reduce this number.
+Number of bytes would be: 32 + 32 + 32 + (32 \* 256) + 256 + 8 = 8552, which is more than 8 MB. We should try different compression techniques to reduce this number.
