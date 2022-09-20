@@ -12,7 +12,7 @@ There are two types of intervals in Eigen Trust:
 
 They are ticking every \~10s and in each tick one iteration of Eigen Trust algorithm is calculated. The number of tick is fixed (depending on how many iterations we need for convergence).
 
-At every iteration nodes will send requests to each other for Iteration Validity Proofs (IVPs). Since every peer will have `n` managers, the requests will be sent to all `n`, assuming that at least one of them will provide correct proof, and be on time. All nodes that did not reply on time or provided invalid proof, will have their score slashed by the requesting peer (broadcast a `0` score into DHT network).
+At every iteration nodes will send requests to each other for Iteration Validity Proofs (IVPs). Since every peer will have `n` managers, the requests will be sent to all `n`, assuming that at least one of them will provide correct proof, and be on time.
 
 <figure><img src="../.gitbook/assets/Iterations-image.jpeg" alt=""><figcaption><p>Illustration of iteration intervals.</p></figcaption></figure>
 
@@ -58,13 +58,14 @@ This way we are ensuring that every node has the same starting time on every Epo
 
 Not requesting IVPs from every manager of the peer N would reduce the computational load on every node. We can create a third class of intervals that are running within the Iteration interval. We can call it Session intervals - Instead of requesting the IVPs from every manager, we request from just one, at each session.
 
-If the mangers doesn't reply, or provides a false proof, we will slash him (distributing a `0` score in the DHT network).
+The process of choosing to which manager we will send requests should be calculated simply - e.g. sorting them by public keys.
 
-If the manager does reply with correct proof, we will give him an `x` amount of reputation.
+Also, instead of sending requests at the beginning of each session, we could broadcast the IVP as soon as we receive the required IVPs from our neighbours. This way the network will converge much faster, and we will use interval just as timeouts.
 
-The process of choosing to which manager we will send requests should be calculated based on their reputation in previous Epoch, in a following way:\
-\- First we find all the managers for peer N.\
-\- We query their reputation, and normalise it.\
-\- We pick a random manager based on this normalised distribution.
+TBA:
 
-Also, instead of sending requests at the beginning of each session, we could broadcast the IVP as soon as we receive the required IVPs from our neighbours. This way the network will converge much faster, and we will us interval as timeouts -- places where we slash neighbours in case they didn't deliver the proof in time.
+* Better illustrations
+* Explain MVP more clearly
+* Explain future optimisations more clearly
+* Explain what happens after the last iteration - preparing for the next epoch (collecting the manager set from the DHT and the signatures they hold, to figure out who is tinkering with signatures)
+* Explain that every manager will query the DHT at slightly separate times, which means that two managers of peer n could get different set of the managers for peer `n` neighbours

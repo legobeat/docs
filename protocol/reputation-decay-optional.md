@@ -21,7 +21,7 @@ $$
 
 We could also use different functions for different domains. For example the manager domain should have much steeper slope, and the cliff should start sooner, since we want to incentivise managers to constantly be online to keep their reputation at a maximum level.
 
-IMPORTANT NOTE: This is just a proposal, but explicit reputation decay might not be necessary since the reputation will decay naturally for 2 reasons:
+_<mark style="color:red;">**IMPORTANT NOTE**</mark>_: This is just a proposal, but explicit reputation decay might not be necessary since the reputation will decay naturally for 2 reasons:
 
 * Number of neighbours are limited to 256, peers will occasionally remove some neighbours from slots, automatically giving them 0 reputation. They will probably remove someone with whom they did not interact in a while.
 * As soon as the neighbour increases the opinion towards one neighbour, all the other neighbours will have their score diluted by the same amount. The scores of neighbours with whom they interact more ofter, will be updated more ofter, leaving other neighbours score getting diluted more and more over time.

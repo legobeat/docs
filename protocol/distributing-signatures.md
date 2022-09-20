@@ -59,3 +59,11 @@ let message_hash = merkle_tree_from(pairs);
 ```
 
 Number of bytes would be: 32 + 32 + 32 + (32 \* 256) + 256 = 8544, which is more than 8 MB. We should try different compression techniques to reduce this number.
+
+TBA:
+
+* preparing for the next epoch (collecting the manager set from the DHT and the signatures they hold, to figure out who is tinkering with signatures) - how many requests each epoch
+* Explain that requests are made just before the next epoch. During the epoch, the peers are cached, and connections reused
+* Explain that every manager will query the DHT at slightly separate times, which means that two managers of peer n could get different set of the managers for peer `n` neighbours
+* Explain more clearly how message hash is calculated
+* Explain how we prevent the managers from using the older signatures

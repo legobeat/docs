@@ -6,9 +6,12 @@ description: >-
 
 # Domains
 
-* Why domains exist - what kind of domains exist
-* Domain aggregation
-* Special domain for managers and root domain
+* Why domains exist - what kind of domains exist - how many - how are they represented (some kind of a tree, graph?)
+* How are domains aggregated
+* Special domains for managers
+* Remember how it would differ with addition of domains - we could decide the order of managers to query based on their reputation in the previous epoch in some domain related to management. Also explain that if manager manages 10 peers there have to be 10 different domains, one for each peer. In each domain managers will have 256 neighbours, and there will be just 1 valid manager for each of these neighbours that we will interact with. We will give the reputation equally to each one of them. The invalid managers will not receive any reputation.
+* Explain how do we organise signatures
+* How do we query each domain - does with come within one signature or there is a separate signature for each domain, if so, how do we find them
 
 ### Why domains exist?
 

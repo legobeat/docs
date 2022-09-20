@@ -16,8 +16,9 @@ When peer comes online the DHT network will assign them keys that they should pr
 
 At he beginning of each epoch, managers will query their own DHT buckets to obtain keys they are providing. Then, they can query the DHT network for figure out who is managing the neighbours of the peers associated with these keys. When they collect all that data, they can start providing the IVPs.
 
-### What happens when they misbehave?
+TBA:
 
-After every iteration interval, peers will keep track who responded with invalid IVPs. Then they will cache their peer id in memory, so that they don't make a request to them in the next iteration and give them `0` reputation at the end of the last iteration.
-
-To the nodes that behaved correctly, peers will distribute their scores to each of them equally.
+* Explain how managers figure out if are selected every epoch. Explain that managers can have a key in their bucket, but might not be asked for their proofs, this is because of the delay in DHT requests
+* Add illustration on how managers figure out who they manage
+* Explain how managers are finding the managers of the peers they manage.
+* Explain that managers don't have anything to gain in this model, and how many of them is needed to keep the network running - explain why the incentives are needed (not possible to implement without domains)
