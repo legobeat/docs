@@ -20,5 +20,6 @@ TBA:
 
 * Explain how managers figure out if are selected every epoch. Explain that managers can have a key in their bucket, but might not be asked for their proofs, this is because of the delay in DHT requests
 * Add illustration on how managers figure out who they manage
+* Explain that the managers should calculate initial proof in the iteration 0 after they query their bucket
 * Explain how managers are finding the managers of the peers they manage.
 * Explain that managers don't have anything to gain in this model, and how many of them is needed to keep the network running - explain why the incentives are needed (not possible to implement without domains)
