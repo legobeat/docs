@@ -9,25 +9,37 @@ description: >-
 First, let's define circuit inputs:
 
 ```rust
-*private - pubkeys[NUM_NEIGHBOURS]  // public key of neighbors
-*private - op_ij[NUM_NEIGHBOURS] // local scores towards the neighbors j
-*private - op_ji[NUM_NEIGHBOURS]  // all neighbors opinions towards peer i
-*private - neighbour_scores[NUM_NEIGHBOURS] // neighbour reputation scores
-                                    // in the previous iteration
-*private - merkle_paths[NUM_NEIGHBOURS] // merkle paths needed for calculating
-                                    // the message hashes of all the neighbours
-*private - signature_i // Signature on message_hash
-*private - pubkey_i // public key of peer i
-*private - previous_score // Our score in previous iteration
+// public key of neighbors
+*private - pubkeys[NUM_NEIGHBOURS]
+// local scores towards the neighbors j
+*private - op_ij[NUM_NEIGHBOURS]
+// all neighbors opinions towards peer i
+*private - op_ji[NUM_NEIGHBOURS]
+// neighbour reputation scores in the previous iteration
+*private - neighbour_scores[NUM_NEIGHBOURS]
+// merkle paths needed for calculating the message hashes of all the neighbours
+*private - merkle_paths[NUM_NEIGHBOURS]
+// Signature on message_hash
+*private - signature_i
+// public key of peer i
+*private - pubkey_i
+// Our score in previous iteration
+*private - previous_score 
 
-public   - message_hash // Message hash of peer i
-public   - score // Score of peer i in the iteration
-public   - iteration // Current iteration
+// Message hash of peer i
+public   - message_hash
+// Score of peer i in the iteration
+public   - score
+// Current iteration
+public   - iteration
 
-constant - bootstrap_pubkeys[NUM_BOOTSTRAP_PEERS] // pubkeys of bootstrap nodes
-constant - bootstrap_score // Score of the bootstrap peers
-constant - scale // We have to scale the opinions (which are between 0 and 1)
-                     // to do the arithmetic inside the circuit
+// pubkeys of bootstrap nodes
+constant - bootstrap_pubkeys[NUM_BOOTSTRAP_PEERS]
+// Score of the bootstrap peers
+constant - bootstrap_score
+// We have to scale the opinions (which are between 0 and 1)
+// to do the arithmetic inside the circuit
+constant - scale
 ```
 
 First thing we want to do is aggregate the proofs we got from our neighbours. In order to do that we would first need to construct the message hash. We do that by re-creating the Merkle root, using the Merkle path provided by the neighbours. At the end we calculate the score given to use by multiplying the neighbour global score with their opinion about us.
@@ -54,10 +66,10 @@ aggregate_self_proof(message_hash, previous_score, iteration - 1)
 
 Next, we want to do some validation regarding our message hash. There are 4 things we need to check:
 
-* That all of our neighbours pubkeys are unique. We do this to ensure we are not giving reputation to the same neighbour more than once, to avoid some funny business coordinated between managers.
+* That all of our neighbours public keys are unique. We do this to ensure we are not giving reputation to the same neighbour more than once, to avoid some funny business coordinated between managers.
 * Make sure our own public key is not in the set. We can't give back reputation to ourselves.
 * Make sure our opinions scores add up to one (scaled).
-* Make sure those pubkeys and opinions that we checked previously are actually the ones that are used in our message hash.
+* Make sure those public keys and opinions that we checked previously are actually the ones that are used in our message hash.
 
 ```rust
 // Ensure uniqueness of neighbours
