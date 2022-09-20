@@ -45,7 +45,6 @@ struct Value {
     sig_s: [u8; 32],
     neighbours: [[u8; 32]; 256],
     scores: [u8; 256],
-    epoch: u64,
 }
 ```
 
@@ -55,9 +54,8 @@ To calculate the message hash, we do the following (pseudo Rust code):
 // First, we want to construct pairs from neighbours and scores
 let pairs = [(neighbours[0], scores[0]) ... (neighbours[n], scores[n])];
 // Then we construct a hight-9 merkle root from these pairs
-let merkle_tree_root = merkle_tree_from(pairs);
-// Then we hash the root and the domain and get the message hash
-let message_hash = poseidon(merkle_tree_root, domain);
+// which is the message hash
+let message_hash = merkle_tree_from(pairs);
 ```
 
-Number of bytes would be: 32 + 32 + 32 + (32 \* 256) + 256 + 8 = 8552, which is more than 8 MB. We should try different compression techniques to reduce this number.
+Number of bytes would be: 32 + 32 + 32 + (32 \* 256) + 256 = 8544, which is more than 8 MB. We should try different compression techniques to reduce this number.

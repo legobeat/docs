@@ -18,7 +18,7 @@ At every iteration nodes will send requests to each other for Iteration Validity
 
 ### Epochs - long intervals:
 
-At the start of an epoch, we are kickstarting the convergence process by starting the Iteration interval. Epoch last much longer than iterations. e.g. one epoch might last 24 hours, while the whole 10 iteration can last 30 minutes. So, most of the time available in the epoch, the network will do nothing. Allowing the nodes to compute other proofs (like CVPs), respond to RPC requests or similar.
+At the start of an epoch, we are kickstarting the convergence process by starting the Iteration interval. Epoch last much longer than iterations. e.g. one epoch might last 24 hours, while the whole 10 iteration can last 30 minutes. So, most of the time available in the epoch, the network will do nothing. Allowing the nodes to prepare for the next epoch, respond to RPC requests or similar.
 
 <figure><img src="../.gitbook/assets/Epochs-image.jpeg" alt=""><figcaption><p>Illustration of Epoch interval.</p></figcaption></figure>
 
@@ -66,3 +66,5 @@ The process of choosing to which manager we will send requests should be calcula
 \- First we find all the managers for peer N.\
 \- We query their reputation, and normalise it.\
 \- We pick a random manager based on this normalised distribution.
+
+Also, instead of sending requests at the beginning of each session, we could broadcast the IVP as soon as we receive the required IVPs from our neighbours. This way the network will converge much faster, and we will us interval as timeouts -- places where we slash neighbours in case they didn't deliver the proof in time.

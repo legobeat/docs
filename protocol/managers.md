@@ -14,7 +14,7 @@ If we required each peer to calculate their own scores, then the whole network w
 
 When peer comes online the DHT network will assign them keys that they should provide. Managers use this functionality to figure out who they should manage.
 
-At he beginning of each epoch, managers will query their own DHT buckets to obtain keys they are providing. Then, they can query the DHT network for figure out who is managing the neighbours of the peers associated with these keys. When they collect all that data, they can start providing the IVPs and CVPs.
+At he beginning of each epoch, managers will query their own DHT buckets to obtain keys they are providing. Then, they can query the DHT network for figure out who is managing the neighbours of the peers associated with these keys. When they collect all that data, they can start providing the IVPs.
 
 ### What happens when they misbehave?
 
