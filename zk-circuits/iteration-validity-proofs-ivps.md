@@ -47,8 +47,7 @@ First thing we want to do is aggregate the proofs we got from our neighbours. In
 ```rust
 let score_ji = []
 for j in 0..NUM_NEIGHBOURS {
-  // Here we check that each merkle_path at index n results in a
-  // merkle root that is equal to message_hash at the same index
+  // Here we are re-constructing the message hash
   let m_hash_j = validate_merkle_path(merkle_paths[j], op_ji[j], pubkey_i)
   // Aggregate all the opinion proofs you got from the neighbors
   agreggate_neighbour_proof(m_hash_j, neighbour_scores[j], iteration - 1)

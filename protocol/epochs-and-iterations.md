@@ -28,6 +28,8 @@ At the start of an epoch, we are kickstarting the convergence process by startin
 
 Every manager will query the DHT at slightly different times (we are talking about milliseconds in difference), which means there is a potential that some peers will register a neighbouring manager that went offline during this time window. We think that the chances of this are minimal, and even if that happens, there are will be plenty of other managers to chose from.
 
+The managers assigned at the start of the epoch will be expected to be online for the whole epoch. We could also decide to refresh the local manager set more regularly, e.g. at the beginning of each iteration.
+
 <figure><img src="../.gitbook/assets/Epochs-image.jpeg" alt=""><figcaption><p>Illustration of Epoch interval.</p></figcaption></figure>
 
 In order for the network to work properly, the nodes have to start the epoch at the same time, otherwise their iterations will not run in parallel, therefore blocking the whole network from progressing.
