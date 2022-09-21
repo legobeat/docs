@@ -188,7 +188,3 @@ let final_score = conditionally_select(
 assert_eq(final_score, score)
 // Verify the signature on message_hash
 verify_eddsa_signature(signature_i, pubkey_i, message_hash)</code></pre>
-
-TBA:
-
-* Figure out how to handle 0 iteration - there are no proofs from neighbours to aggregate so everyone should have reputation 0, except bootstrap peers.
