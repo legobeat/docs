@@ -9,9 +9,9 @@ description: >-
 ### Where do we store signatures?
 
 * Our assumption is that, in a DHT network, when you insert a key, the protocol will find the `n` closest peers to that key, and make them providers for that key. In our case the keys will be the public keys of everyone in the network, and the values will be latest signatures from the peers we are managing.
-* When a peer connects to a DHT network, it will put its own public key as a key in the network using PUT\_VALUE command. The protocol will automatically assign the providers for the key.
+* When a peer broadcast their signature into the DHT network using PUT\_VALUE command, the protocol will automatically assign the providers for the key.
 * When a peer that is providing some key (in DHT network) disconnects, the DHT should update the neighbouring peers to make them providers of the keys that were previously provided by that peer.
-* Peers should be able to find the providers of trust scores for a given neighbouring peer by using GET\_PROVIDERS command.
+* Peers should be able to find the providers of signatures for a given peer by using GET\_PROVIDERS command.
 * Peers should be able to query their own buckets to see which keys they are providing. They should compute IVPs and provide them to the peers requesting it.
 
 More on how DHT works: [https://github.com/libp2p/specs/blob/master/kad-dht/README.md](https://github.com/libp2p/specs/blob/master/kad-dht/README.md)
