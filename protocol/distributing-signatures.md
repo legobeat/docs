@@ -62,7 +62,7 @@ Number of bytes would be: 32 + 32 + 32 + (32 \* 256) + 256 = 8544, which is more
 
 TBA:
 
-* preparing for the next epoch (collecting the manager set from the DHT and the signatures they hold, to figure out who is tinkering with signatures) - how many requests each epoch
+* preparing for the next epoch (collecting the manager set from the DHT and the signatures they hold, to figure out who is tinkering with signatures) - how many requests each epoch - actually just fetch the signatures of all neighbours using DHT quorum (which will give you the correct one if majority is honest), then every time a neighbour provides a proof, use the message hash from that signature to make sure they are using the right one. -- the point is: don't trust other managers to give you the signatures for their peers - instead fetch it yourself from DHT
 * Explain that requests are made just before the next epoch. During the epoch, the peers are cached, and connections reused
 * Explain that every manager will query the DHT at slightly separate times, which means that two managers of peer n could get different set of the managers for peer `n` neighbours
 * Explain more clearly how message hash is calculated
