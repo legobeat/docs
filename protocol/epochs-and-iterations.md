@@ -64,8 +64,12 @@ Visual illustration:
 
 This way we are ensuring that every node has the same starting time on every Epoch.
 
-### Proposal
+### Future optimisation - Proposal
 
-Also, instead of sending requests at the beginning of each session, we could broadcast the IVP as soon as we receive the required IVPs from our neighbours - on every response we will check if we got the proof from every neighbour, in which case we will calculate the IVP for the next iteration and broadcast it immediately to all neighbours.
+Not requesting IVPs from every manager of the peer N would reduce the computational load on every node. We can create a third class of intervals that are running within the Iteration interval. We can call it Session intervals - Instead of requesting the IVPs from every manager, we request from just one, at each session.
 
-This way the network will converge much faster.
+The process of choosing to which manager we will send requests to should be calculated simply - e.g. sorting them by public keys x value.
+
+Also, instead of sending requests at the beginning of each session, we could broadcast the IVP as soon as we receive the required IVPs from our neighbours - on every response we will check if we got the proof from every neighbour, in which case we will calculate the IVP for the next iteration and broadcast it immediately.
+
+This way the network will converge much faster, and we will use interval as timeouts - in case the current manager doesn't reply we will send request to another manager.

@@ -88,18 +88,26 @@ Next, we are checking if we are bootstrap peer in the initial iteration. If we a
 ```rust
 // Check if we are at zero-th iteration
 let is_zero_it = is_zero(iteration)
+// Check if we are a bootstrap peer
+let is_bootstrap = set_membership(bootstrap_pubkeys[..], pubkey_i)
 // Is bootstrap peer at zero iteration
 let is_bootstrap_at_zero = and(is_bootstrap, is_zero_it)
 // Calculate the sum of all the scored you got from all the neighbors
 let sum_ji = sum(score_ji[..]) / scale
-// Assign bootstrap score if we at bootstrap peer at iter zero
+// If we are at iteration zero, we should have zero score
 let iter_score = conditionally_select(
-  is_bootstrap_at_zero,
+  is_zero_it,
+  F::zero(),
   sum_ji,
+)
+// Except if we are a bootstrap peer, than we should have a bootstrap score
+let final_score = conditionally_select(
+  is_bootstrap_at_zero,
+  iter_score,
   bootstrap_score
 )
 // Check if score is equal to public input
-assert_eq(iter_score, score)
+assert_eq(final_score, score)
 ```
 
 And finally, we verify our EDDSA signature, providing the message hash:
@@ -111,8 +119,7 @@ verify_eddsa_signature(signature_i, pubkey_i, message_hash)
 
 Putting it all together:
 
-```rust
-
+<pre class="language-rust"><code class="lang-rust">
 // ------------------ INPUTS -------------------------
 *private - pubkeys[NUM_NEIGHBOURS]  // public key of neighbors
 *private - op_ij[NUM_NEIGHBOURS] // local scores towards the neighbors j
@@ -157,23 +164,30 @@ assert_eq(sum(op_ij[..]), scale)
 let rec_message_hash = construct_merkle_tree(pubkeys[..], op_ij[..])
 // Make sure its the same as public input
 assert_eq(rec_message_hash, message_hash)
-// Check if we are at zero-th iteration
-let is_zero_it = is_zero(iteration)
+<strong>// Check if we are at zero-th iteration
+</strong>let is_zero_it = is_zero(iteration)
+// Check if we are a bootstrap peer
+let is_bootstrap = set_membership(bootstrap_pubkeys[..], pubkey_i)
 // Is bootstrap peer at zero iteration
 let is_bootstrap_at_zero = and(is_bootstrap, is_zero_it)
 // Calculate the sum of all the scored you got from all the neighbors
 let sum_ji = sum(score_ji[..]) / scale
-// Assign bootstrap score if we at bootstrap peer at iter zero
+// If we are at iteration zero, we should have zero score
 let iter_score = conditionally_select(
-  is_bootstrap_at_zero,
+  is_zero_it,
+  F::zero(),
   sum_ji,
+)
+// Except if we are a bootstrap peer, than we should have a bootstrap score
+let final_score = conditionally_select(
+  is_bootstrap_at_zero,
+  iter_score,
   bootstrap_score
 )
 // Check if score is equal to public input
-assert_eq(iter_score, score)
+assert_eq(final_score, score)
 // Verify the signature on message_hash
-verify_eddsa_signature(signature_i, pubkey_i, message_hash)
-```
+verify_eddsa_signature(signature_i, pubkey_i, message_hash)</code></pre>
 
 TBA:
 
