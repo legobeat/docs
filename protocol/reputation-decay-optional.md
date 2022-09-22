@@ -17,7 +17,7 @@ $$
 scale-\left(scale/(1+offset*\exp(-\frac{x}{slope}))\right)
 $$
 
-<figure><img src="../.gitbook/assets/Screenshot 2022-09-20 at 12.13.41 (1).png" alt=""><figcaption><p>scale = 100, offset = 100, slope = 100</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/Screenshot 2022-09-20 at 12.13.41.png" alt=""><figcaption><p>scale = 100, offset = 100, slope = 100</p></figcaption></figure>
 
 We could also use different functions for different domains. For example the manager domain should have much steeper slope, and the cliff should start sooner, since we want to incentivise managers to constantly be online to keep their reputation at a maximum level.
 
