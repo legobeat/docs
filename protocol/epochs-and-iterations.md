@@ -20,11 +20,10 @@ At iteration `0` peers will query their own DHT bucket for signatures to figure 
 
 ### Epochs - long intervals:
 
-At the start of an epoch, we are kickstarting the convergence process by starting the Iteration interval. Epoch last longer than iterations. e.g. one epoch might last 1 hour, while the whole 10 iteration can last 30 minutes. In the other half the peers will prepare for the next epoch. There are 3 things a peers need to do to prepare for the epoch:
+At the start of an epoch, we are kickstarting the convergence process by starting the Iteration interval. Epoch last longer than iterations. e.g. one epoch might last 1 hour, while the whole 10 iteration can last 30 minutes. In the other half the peers will prepare for the next epoch. There are 2 things a peers need to do to prepare for the epoch:
 
 * Query their own DHT bucket (see how [Managers](managers.md) and [Signatures](distributing-signatures.md) work) to find signatures of the  peers they are managing. They should store them in cache, since their bucket will change over time, so we need to lock on certain peers for a particular epoch.
 * Query the DHT network for the providers of the keys of the neighbours of the peers they are managing. The neighbours will be found in each signature object queried from the DHT bucket. These providers should be cached and the proofs will be requested from them in the next epoch.
-* Query the signatures of all the neighbours of the peers they are managing, and use DHT Quorum to get the correct value. These signatures will be cached and the message hashes derived from them will be passed in every proof that neighbour provides, to make sure they are using the latest signature and not some older one.
 
 Every manager will query the DHT at slightly different times (we are talking about milliseconds in difference), which means there is a potential that some peers will register a neighbouring manager that went offline during this time window. We think that the chances of this are minimal, and even if that happens, there are will be plenty of other managers to chose from.
 
@@ -66,6 +65,6 @@ This way we are ensuring that every node has the same starting time on every Epo
 
 ### Proposal
 
-Also, instead of sending requests at the beginning of each session, we could broadcast the IVP as soon as we receive the required IVPs from our neighbours - on every response we will check if we got the proof from every neighbour, in which case we will calculate the IVP for the next iteration and broadcast it immediately to all neighbours.
+Instead of sending requests in each iteration, we could broadcast the IVP as soon as we receive the required IVPs from our neighbours - on every response we will check if we got the proof from every neighbour, in which case we will calculate the IVP for the next iteration and broadcast it immediately to all neighbours.
 
-This way the network will converge much faster.
+This way we can ditch the iterations completely, allowing the slower nodes also participating in the network. Also the network will converge much faster.
