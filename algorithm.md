@@ -66,11 +66,11 @@ let mut s: [f32; 5] = [1000., 2000., 500., 300., 200.];
 const NUM_ITER: usize = 10;
 
 for _ in 0..NUM_ITER {
-	let op0 = [0.5, 0.2, 0.3, 0.0, 0.0]; // - Peer 0 opinions
-	let op1 = [0.0, 0.1, 0.1, 0.1, 0.7]; // - Peer 1 opinions
-	let op2 = [0.4, 0.1, 0.1, 0.1, 0.3]; // - Peer 2 opinions
-	let op3 = [0.1, 0.1, 0.7, 0.1, 0.0]; // - Peer 3 opinions
-	let op4 = [0.2, 0.1, 0.4, 0.2, 0.1]; // = Peer 4 opinions
+	let op0 = [0.0, 0.2, 0.3, 0.5, 0.0]; // - Peer 0 opinions
+	let op1 = [0.1, 0.0, 0.1, 0.1, 0.7]; // - Peer 1 opinions
+	let op2 = [0.4, 0.1, 0.0, 0.2, 0.3]; // - Peer 2 opinions
+	let op3 = [0.1, 0.1, 0.7, 0.0, 0.1]; // - Peer 3 opinions
+	let op4 = [0.3, 0.1, 0.4, 0.2, 0.0]; // = Peer 4 opinions
 
 	// sop0 = s[0] * op0
 	let sop0 = op0.map(|v| v * s[0]);
