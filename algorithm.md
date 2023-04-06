@@ -111,6 +111,3 @@ The logs:
 ```
 
 We can see that only after a few iterations, the scores will converge, depending on how much accuracy you need.
-
-Now, let's go back to explaining why is it called Eigen Trust:\
-We don't know why it's called Eigen Trust -- it has something to do with the principal eigenvector of the matrix `op`  or something :tada: - TBA
