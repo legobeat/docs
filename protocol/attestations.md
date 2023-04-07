@@ -14,12 +14,7 @@ Examples (Let's assume we are doing ratings from 0-5):
 - Carol says Bob with a rating of 4
 - Alice attests Bob with a rating of 1
 
-Now let's assign a unique identifier for each peer:
-Alice = 1
-Bob = 2
-Carol = 3
-
-The structure of the signature:
+The structure of the attestation:
 ```rust
 struct Attestation<F: FieldExt> {
     about: F,
