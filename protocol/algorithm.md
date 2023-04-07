@@ -4,10 +4,10 @@ description: A higher level description of Eigen Trust protocol.
 
 # Algorithm
 
-The name Eigen Trust originates from the original paper: [https://nlp.stanford.edu/pubs/eigentrust.pdf](https://nlp.stanford.edu/pubs/eigentrust.pdf)\
-\
-It relates to the way the reputation score is calculated, which is done the following way:\
-\
+The name Eigen Trust originates from the [original paper](https://nlp.stanford.edu/pubs/eigentrust.pdf).
+
+It relates to the way the reputation score is calculated, which is done the following way:
+
 Suppose we have a vector `s` that contains the initial scores for 5 peers:
 
 ```
@@ -110,4 +110,4 @@ The logs:
 [ 817.4117,  437.8922, 1169.3523,  834.3715,  740.9730] - iter 9
 ```
 
-We can see that only after a few iterations, the scores will converge, depending on how much accuracy you need.
+We can see that only after a few iterations, the scores will converge, depending on how much accuracy is needed.

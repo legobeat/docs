@@ -1,3 +1,9 @@
 # Table of contents
 
-* [Algorithm](README.md)
+* [EigenTrust](README.md)
+
+## Protocol
+
+* [The Algorithm](protocol/algorithm.md)
+* [Attestation Station](protocol/attestation_station.md)
+* [Attestation](protocol/attestations.md)
