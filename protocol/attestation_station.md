@@ -18,4 +18,4 @@ struct AttestationData {
 }
 ```
 
-The structure of `bytes val;` are described in [Attestations](https://app.gitbook.com/o/8CNhhLC4GayMSznMxZt1/s/CH5I1CKimkNiX7iqcLcK/protocol/attestations).
+The structure of `bytes val;` are described in [Attestations](../protocol/attestations.md).
