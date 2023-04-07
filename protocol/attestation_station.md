@@ -18,4 +18,4 @@ struct AttestationData {
 }
 ```
 
-The structure of `bytes val;` are described in [Attestation Station](https://eigen-books.gitbook.io/eigen-trust/protocol/attestation_station.md).
+The structure of `bytes val;` are described in [Attestation Station](https://eigen-books.gitbook.io/eigen-trust/protocol/attestation_station).
