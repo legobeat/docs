@@ -18,4 +18,4 @@ struct AttestationData {
 }
 ```
 
-// Point to attestation page to see what are the bytes inside val
+The structure of `bytes val;` are described in [Attestation Station](protocol/attestation_station.md).
