@@ -1,7 +1,6 @@
 # Table of contents
 
 * [EigenTrust](README.md)
-
 * [Attestation Station](0_attestation_station.md)
 * [Attestation](1_attestations.md)
 * [Data Processing](2_algorithm.md)
