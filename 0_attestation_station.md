@@ -18,4 +18,4 @@ struct AttestationData {
 }
 ```
 
-The structure of `bytes val;` are described in [Attestations](../attestations.md).
+The structure of `bytes val;` are described in [Attestations](../0_attestations.md).
