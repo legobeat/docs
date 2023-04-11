@@ -1,9 +1,7 @@
 # Table of contents
 
 * [EigenTrust](README.md)
-
-## Protocol
-
-* [The Algorithm](protocol/algorithm.md)
-* [Attestation Station](protocol/attestation_station.md)
-* [Attestation](protocol/attestations.md)
+* [The Algorithm](algorithm.md)
+* [Attestation Station](attestation_station.md)
+* [Attestation](attestations.md)
+* [Dynamic Sets](dynamic_sets.md)
