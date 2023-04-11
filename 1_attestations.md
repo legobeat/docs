@@ -35,6 +35,6 @@ Then we use Poseidon to hash the attestation and get a single 32-byte value, whi
 let att_hash = Poseidon::hash(attestation);
 let sig = ECDSA::sign(att_hash, keys);
 ```
-The signature represented in bytes, along with the attestation hash bytes are stored in AttestationStation smart contract. See [AttestationStation](../1_attestation_station.md).
+The signature represented in bytes, along with the attestation hash bytes are stored in AttestationStation smart contract. See [AttestationStation](../0_attestation_station.md).
 
 The reason we are signing the attestation is in case we want to verify the validity of the attestation in an off-chain environment.
