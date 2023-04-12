@@ -23,12 +23,19 @@ Next, we search the AS to construct the opinion map. We do this by going through
 
 ```rust
 for i in 0..group.len() {
+    let peer_i = group[i];
+    if peer_i == null {
+        continue;
+    }
     for j in 0..group.len() {
-        let peer_i = group[i];
         let peer_j = group[j];
-        if peer_i == peer_j {
+
+        let is_null = peer_j == null;
+        let is_self = peer_i == peer_j;
+        if is_null || is_self  {
             continue;
         }
+
         let att = AS.attestations(peer_i, peer_j, group_id);
         op_map[peer_i][j] = (peer_j, att);
     }

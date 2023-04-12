@@ -69,6 +69,10 @@ The pseudo code algorithm:
 ```rust
 for i in set.len() {
     let pk_i = set[i];
+    if pk_i == null {
+        continue;
+    }
+
     for j in set.len() {
         let pk_j = set[j];
         let op_pk_j = scores[pk_i][j].0;
