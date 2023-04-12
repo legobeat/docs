@@ -21,9 +21,11 @@ The items in the array are touples of the id of the peer that we want to give th
 
 The whole map should look like this:
 ```
-peer1 => [(peer1, 0), (peer2, 4), (peer3, 6), (null, 0), (null, 0)]
-peer2 => [(peer1, 4), (peer2, 0), (peer3, 6), (null, 0), (null, 0)]
-peer3 => [(peer1, 4), (peer2, 6), (peer3, 0), (null, 0), (null, 0)]
+scores => {
+    peer1 => [(peer1, 0), (peer2, 4), (peer3, 6), (null, 0), (null, 0)]
+    peer2 => [(peer1, 4), (peer2, 0), (peer3, 6), (null, 0), (null, 0)]
+    peer3 => [(peer1, 4), (peer2, 6), (peer3, 0), (null, 0), (null, 0)]
+}
 ```
 
 **Filtering of invalid cases:**
@@ -62,3 +64,40 @@ peer1 => [(peer1, 0), (peer2, 1), (peer3, 1), (null, 0), (null, 0)]
 
 4) Opinion array does not exist/not signed:\
 Will be treated the same way as 3). The equal score will be distributed to all peers
+
+The pseudo code algorithm:
+```rust
+for i in set.len() {
+    let pk_i = set[i];
+    for j in set.len() {
+        let pk_j = set[j];
+        let op_pk_j = scores[pk_i][j].0;
+
+        let is_diff_pk_j = pk_j != op_pk_j;
+		let is_pk_j_zero = pk_j == null;
+		let is_pk_i = pk_j == pk_i;
+
+		if is_diff_pk_j || is_pk_j_zero || is_pk_i {
+			scores[pk_i][j].1 = 0;
+		}
+
+		if is_diff_pk_j {
+			scores[pk_i][j].0 = pk_j;
+		}
+    }
+
+    let op_score_sum = sum(scores[pk_i]);
+    if op_score_sum == 0 {
+        for j in 0..group.len() {
+            let pk_j = scores[pk_i][j].0;
+
+            let is_diff_pk = pk_j != pk_i;
+			let is_not_null = pk_j != null;
+
+			if is_diff_pk && is_not_null {
+				scores[pk_i][j] = (pk_j, Fr::from(1));
+			}
+        }
+    }
+}
+```
