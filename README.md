@@ -11,4 +11,4 @@ Incorruptible - Reputation should be obtained by consistent good behavior throug
 
 Permissonless - New peers can join the system without the permisson of central autorithy, given that they satisfy certain critirea.
 
-Anonymity - Through systems like (Semaphore)[https://semaphore.appliedzkp.org/], peers can join anonymously.
+Anonymity - Through systems like [Semaphore](https://semaphore.appliedzkp.org/), peers can join anonymously.
