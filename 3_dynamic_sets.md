@@ -74,16 +74,16 @@ for i in set.len() {
         let op_pk_j = scores[pk_i][j].0;
 
         let is_diff_pk_j = pk_j != op_pk_j;
-		let is_pk_j_zero = pk_j == null;
-		let is_pk_i = pk_j == pk_i;
+        let is_pk_j_zero = pk_j == null;
+        let is_pk_i = pk_j == pk_i;
 
-		if is_diff_pk_j || is_pk_j_zero || is_pk_i {
-			scores[pk_i][j].1 = 0;
-		}
+        if is_diff_pk_j || is_pk_j_zero || is_pk_i {
+            scores[pk_i][j].1 = 0;
+        }
 
-		if is_diff_pk_j {
-			scores[pk_i][j].0 = pk_j;
-		}
+        if is_diff_pk_j {
+            scores[pk_i][j].0 = pk_j;
+        }
     }
 
     let op_score_sum = sum(scores[pk_i]);
@@ -92,11 +92,11 @@ for i in set.len() {
             let pk_j = scores[pk_i][j].0;
 
             let is_diff_pk = pk_j != pk_i;
-			let is_not_null = pk_j != null;
+            let is_not_null = pk_j != null;
 
-			if is_diff_pk && is_not_null {
-				scores[pk_i][j] = (pk_j, Fr::from(1));
-			}
+            if is_diff_pk && is_not_null {
+                scores[pk_i][j] = (pk_j, Fr::from(1));
+            }
         }
     }
 }
