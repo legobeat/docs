@@ -58,45 +58,65 @@ Next steps:
 
 Everything we did was just one iteration of Eigen Trust algorithm. If we apply the same process throughout several iterations, the reputation score of each peer will not change much further after a certain point. When that happens we say that the reputation scores has **converged.**
 
-Here is an algorithm example written in Rust:
-
+Let's define what is the number of iterations:
 ```rust
-let mut s: [f32; 5] = [1000., 2000., 500., 300., 200.];
+const NUM_ITER = 10;
+```
 
-const NUM_ITER: usize = 10;
+And the starting EigenTrust set as well as the inital score for each peer:
+```rust
+s = [(peer1, 1000), (peer2, 2000), (peer3, 500), (peer4, 300), (peer5, 200)]
+```
 
-let op0 = [0.0, 0.2, 0.3, 0.5, 0.0]; // - Peer 0 opinions
-let op1 = [0.1, 0.0, 0.1, 0.1, 0.7]; // - Peer 1 opinions
-let op2 = [0.4, 0.1, 0.0, 0.2, 0.3]; // - Peer 2 opinions
-let op3 = [0.1, 0.1, 0.7, 0.0, 0.1]; // - Peer 3 opinions
-let op4 = [0.3, 0.1, 0.4, 0.2, 0.0]; // = Peer 4 opinions
+Now, the scores map:
+```rust
+scores => {
+    peer1 => [(peer1, 0), (peer2, 2), (peer3, 3), (peer4, 5), (peer5, 0)]
+    peer2 => [(peer1, 1), (peer2, 0), (peer3, 1), (peer4, 1), (peer5, 7)]
+    peer3 => [(peer1, 4), (peer2, 1), (peer3, 0), (peer4, 2), (peer5, 3)]
+    peer4 => [(peer1, 1), (peer2, 1), (peer3, 7), (peer4, 0), (peer5, 1)]
+    peer5 => [(peer1, 3), (peer2, 1), (peer3, 4), (peer4, 2), (peer5, 0)]
+}
+```
 
+Minimum number of participants should be 2, if it is less, the matrix would not be able to converge:
+```rust
+let valid_peers_count = count(filter(s, |s| s.0 != null))
+assert!(valid_peers_count >= 2)
+```
+
+Before we run the algorithm, we have to normalise the scores:
+```rust
+// Normalise the scores
+for i in 0..s.len() {
+    let (pk_i, creadits) = s[i];
+    if pk == null {
+        continue;
+    }
+    let sum = sum(scores[pk_i]);
+	for j in 0..s.len() {
+	    scores[pk_i][j] = scores[pk_i][j] / sum;
+    }
+}
+```
+
+Now, we have conditions to run the EigenTrust algorithm:
+```rust
 for _ in 0..NUM_ITER {
-	// sop0 = s[0] * op0
-	let sop0 = op0.map(|v| v * s[0]);
-	// sop1 = s[1] * op1
-	let sop1 = op1.map(|v| v * s[1]);
-	// sop2 = s[2] * op2
-	let sop2 = op2.map(|v| v * s[2]);
-	// sop3 = s[3] * op3
-	let sop3 = op3.map(|v| v * s[3]);
-	// sop4 = s[4] * op4
-	let sop4 = op4.map(|v| v * s[4]);
-
-	let s0 = sop0[0] + sop1[0] + sop2[0] + sop3[0] + sop4[0];
-	let s1 = sop0[1] + sop1[1] + sop2[1] + sop3[1] + sop4[1];
-	let s2 = sop0[2] + sop1[2] + sop2[2] + sop3[2] + sop4[2];
-	let s3 = sop0[3] + sop1[3] + sop2[3] + sop3[3] + sop4[3];
-	let s4 = sop0[4] + sop1[4] + sop2[4] + sop3[4] + sop4[4];
-
-	s = [s0, s1, s2, s3, s4];
-
-	println!("[{}]", s.map(|v| format!("{:>9.4}", v)).join(", "));
+    for i in 0..s.len() {
+        let (pk_i, _) = s[i];
+        let new_score = 0;
+        for j in 0..s.len() {
+            let (pk_j, neighbour_score) = s[j];
+            let score = scores[pk_j][i];
+            new_score += score * neighbour_score;
+        }
+        s[i].1 = new_score
+    }
 }
 ```
 
 The logs:
-
 ```
 [490.0000,  300.0000,  790.0000,  840.0000, 1580.0000] - iter 0
 [904.0000,  419.0000, 1397.0000,  749.0000,  531.0000] - iter 1
