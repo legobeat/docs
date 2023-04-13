@@ -1,16 +1,17 @@
 ---
-This page describes our dynamic sets filtering algorithm
+This page describes our dynamic sets filtering algorithm.
 ---
 
 Suppose we create a fixed set of peers with a limit of 5.\
 Instead of using Ethereum addresses we will use simplified identifiers
 like peer1, peer2, peer3, etc. and we will use `null` for empty slots.
 
+This set will change over time as we will be able to add and remove members.
+
+For example, let's say we have the following set of peers:
 ```
 set = [peer1, peer2, peer3, null, null]
 ```
-
-This set will change over time as we will be able to add and remove members.
 
 Now, imagine we have a map that represent opinions from one peer to the whole group. Every opinion should match the set to be valid, in the following way:
 ```
@@ -28,10 +29,12 @@ scores => {
 }
 ```
 
+Now, let's take a look at how we filter out invalid cases from the opinion array.
+
 **Filtering of invalid cases:**
 
 1) Id at the specific index does not match the one in the set:\
-Let's give a score of 5 to the peer13 at the index 3:
+Suppose we want to give a score of 5 to peer13 at the index 3:
 ```
 peer1 => [(peer1, 0), (peer2, 4), (peer3, 6), (peer13, 5), (null, 0)]
 ```
@@ -105,3 +108,11 @@ for i in set.len() {
     }
 }
 ```
+
+Other cases worth thinking about:
+1) Non-unique peer identifiers:\
+If there are two or more peers with the same identifier in the set, the filtering algorithm will not work as intended. To avoid this, it is important to use unique identifiers for each peer.
+2) Performance considerations:\
+As the size of the set and the opinion map grows, the filtering algorithm can become computationally expensive. To optimize performance, it may be necessary to use more efficient data structures and algorithms, such as hash tables or binary trees.
+3) Integration with smart contract platforms:\
+The dynamic sets filtering algorithm can be integrated with smart contract platforms, such as Ethereum, to enable decentralized decision-making based on peer opinions. In such a scenario, the set of peers and their opinions would be stored on the blockchain and the filtering algorithm would be executed by a smart contract. The result of the filtering algorithm would then be used to make decisions in a decentralized and transparent manner.
