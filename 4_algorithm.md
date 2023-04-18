@@ -9,7 +9,6 @@ The name Eigen Trust originates from the [original paper](https://nlp.stanford.e
 It relates to the way the reputation score is calculated, which is done the following way:
 
 Suppose we have a vector `s` that contains the initial scores for 5 peers:
-
 ```
 s = [1000, 2000, 500, 300, 200]
 ```
@@ -17,7 +16,6 @@ s = [1000, 2000, 500, 300, 200]
 We will refer to peers by their index in this set. e.g. Peer 0 is a peer on index `0` (which has reputation of `1000`)
 
 Now let's suppose we have an opinion matrix:
-
 ```
 op0 = [0.0, 0.2, 0.3, 0.5, 0.0] - Peer 0 opinions
 op1 = [0.1, 0.0, 0.1, 0.1, 0.7] - Peer 1 opinions
@@ -31,7 +29,6 @@ The matrix define above describes the distribution of the reputation owned by th
 Now, let's turn that that distribution into scores:
 
 We take the score of Peer N and multiply it with each element in `op[n]`:
-
 ```
 sop0 = s[0] * op0 = [  0, 200, 300, 500,    0]
 sop1 = s[1] * op1 = [200,   0, 200, 200, 1400]
@@ -41,13 +38,11 @@ sop4 = s[4] * op4 = [ 60,  20,  80,  40,    0]
 ```
 
 Now, from this new matrix we can get the new scores for Peer 0:
-
 ```
 s0 = sop0[0] + sop1[0] + sop2[0] + sop3[0] + sop4[0] = 0 + 200 + 200 + 30 + 60 = 490
 ```
 
 If we apply the same for formula we can get the new scores for all peers:
-
 ```
 s = [490, 300, 790, 840, 1580]
 ```
