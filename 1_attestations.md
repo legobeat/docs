@@ -28,6 +28,15 @@ To ensure the integrity and authenticity of an attestation, it is hashed using t
 let att_hash = Poseidon::hash(attestation);
 let sig = ECDSA::sign(att_hash, keys);
 ```
-The resulting signature and attestation hash bytes are stored in the AttestationStation smart contract. See [AttestationStation](../0_attestation_station.md) for more details on how attestations are stored and managed in the EigenTrust protocol.
+The resulting signature, value and message bytes are stored in the AttestationStation smart contract. The bytes layout would be:
+```rust
+r = [u8; 32]
+s = [u8; 32]
+value = u8
+message = [u8; 32]
+```
+This adds up to 97 bytes or 65 if we exclude message bytes.
+
+See [AttestationStation](../0_attestation_station.md) for more details on how attestations are stored and managed in the EigenTrust protocol.
 
 By signing the attestation, the rater can prove that they made the rating and that the rating has not been tampered with. This is important for verifying the validity of the attestation in an off-chain environment, such as when calculating the EigenTrust scores for each peer.
