@@ -37,6 +37,6 @@ verify(accumulator_limbs)
 
 We can also do multiple levels of aggregation in form of a Merkle Tree until we reach the root, where we have aggregated the whole network.
 
-Future directions - Integration with smart contract platforms:\
+Future directions - Integration with smart contract platforms:
 1) Peers can use these proofs to prove their reputation and use them to join communities such as Semaphore groups or similar working groups. We can generalise this to make gate-keeping for any form of action on any protocol.
 2) We can also integrate EigenTrust sets inside the smart contract itself. The converged scores of each participants can be used for reputation-weighted voting inside this smart contract.
