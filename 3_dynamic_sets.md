@@ -108,11 +108,3 @@ for i in set.len() {
     }
 }
 ```
-
-Other cases worth thinking about:
-1) Non-unique peer identifiers:\
-If there are two or more peers with the same identifier in the set, the filtering algorithm will not work as intended. To avoid this, it is important to use unique identifiers for each peer.
-2) Performance considerations:\
-As the size of the set and the opinion map grows, the filtering algorithm can become computationally expensive. To optimize performance, it may be necessary to use more efficient data structures and algorithms, such as hash tables or binary trees.
-3) Integration with smart contract platforms:\
-The dynamic sets filtering algorithm can be integrated with smart contract platforms, such as Ethereum, to enable decentralized decision-making based on peer opinions. In such a scenario, the set of peers and their opinions would be stored on the blockchain and the filtering algorithm would be executed by a smart contract. The result of the filtering algorithm would then be used to make decisions in a decentralized and transparent manner.

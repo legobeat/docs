@@ -6,3 +6,4 @@
 * [Data Processing](2_data_processing.md)
 * [Dynamic Sets](3_dynamic_sets.md)
 * [The Algorithm](4_algorithm.md)
+* [Future Ideas](5_beyond.md)
