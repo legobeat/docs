@@ -18,5 +18,3 @@ The EigenTrust algorithm can be used in a variety of decentralized decision-maki
 - Incorruptible - Reputation should be obtained by consistent good behavior through several transactions. It is resistant to sybil attack through mechanisms of bootstrapping or sybil rank filtering algorithm.
 
 - Permissonless - New peers can join the system without the permisson of central autorithy, given that they satisfy certain critirea.
-
-- Anonymous - Through systems like [Semaphore](https://semaphore.appliedzkp.org/), peers can join anonymously.
